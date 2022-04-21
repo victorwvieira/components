@@ -215,3 +215,28 @@
     outline-width: 3px;
   }
 }
+
+// For the chip element, default inset/offset values are necessary to ensure that
+// the focus indicator is sufficiently contrastive and renders appropriately.
+.mat-mdc-chip-action-label .mat-mdc-focus-indicator::before {
+  $default-border-width: mat.$focus-indicators-private-default-border-width;
+  $border-width: var(--mat-mdc-focus-indicator-border-width, #{$default-border-width});
+  $offset: calc(#{$border-width} + 2px);
+  margin: calc(#{$offset} * -1);
+}
+
+.mat-mdc-focus-indicator.mat-mdc-chip-remove::before {
+  $default-border-width: mat.$focus-indicators-private-default-border-width;
+  margin: var(--mat-mdc-focus-indicator-border-width, #{$default-border-width});
+}
+
+// MDC sets a padding a on the chip button which stretches out the focus indicator.
+.mat-mdc-focus-indicator.mat-mdc-chip-remove::before {
+  left: 8px;
+  right: 8px;
+}
+
+// In the chips the individual actions have focus so we target a different element.
+.mat-mdc-chip-action:focus .mat-mdc-focus-indicator::before {
+  content: '';
+}
